@@ -1,8 +1,13 @@
 {
   "manifest_version": 3,
   "name": "Noob's Prompt Manager",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Chrome extension for AI users to save, organize, and reuse prompts with structured segments, right-click save, labels, and groups",
+  "icons": {
+    "16": "icons/AppIcon16x16.png",
+    "48": "icons/AppIcon48x48.png",
+    "128": "icons/AppIcon128x128.png"
+  },
   "permissions": [
     "contextMenus",
     "storage",
@@ -10,7 +15,12 @@
     "clipboardWrite"
   ],
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/AppIcon16x16.png",
+      "48": "icons/AppIcon48x48.png",
+      "128": "icons/AppIcon128x128.png"
+    }
   },
   "background": {
     "service_worker": "background.js"
