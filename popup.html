@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="appTitle">Noob's Prompt Manager</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <h1 data-i18n="appTitle">Noob's Prompt Manager</h1>
+      <div class="header-actions">
+        <button id="themeToggleBtn" class="icon-btn theme-toggle" title="Toggle theme" aria-label="Toggle theme">
+          <svg class="icon-sun" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+            <path
+              d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278" />
+          </svg>
+          <svg class="icon-moon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+            <path
+              d="M12 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708" />
+          </svg>
+        </button>
+        <button id="settingsBtn" class="icon-btn" data-i18n-attr="title" data-i18n="modalSettings" title="Settings">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path
+              d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Group Selector -->
+    <div class="group-selector">
+      <span data-i18n="selectGroup">Select Group:</span>
+      <select id="groupSelect">
+        <option value="General" data-i18n="defaultGroup">General</option>
+      </select>
+      <button id="editGroupBtn" class="icon-btn" data-i18n-attr="title" data-i18n="modalManageGroups"
+        title="Manage Groups">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
+          <path d="M12.1 1.5a1.5 1.5 0 0 1 0 2.1L4.4 11.3 1.5 12l.7-2.9L9.8 1.5h2.3z" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-bar">
+      <input type="text" id="searchInput" data-i18n-attr="placeholder" data-i18n="searchPlaceholder"
+        placeholder="Search prompts...">
+      <button id="clearSearch" class="clear-btn" title="Clear search">✕</button>
+    </div>
+
+    <!-- Label Filter -->
+    <div class="label-filter">
+      <select id="labelFilter">
+        <option value="all" data-i18n="allLabels">All Labels</option>
+      </select>
+      <button id="addLabelBtn" class="icon-btn" data-i18n-attr="title" data-i18n="labelAddLabel" title="Add Label">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
+          <path
+            d="M7 0a.75.75 0 0 1 .75.75v5.5h5.5a.75.75 0 0 1 0 1.5h-5.5v5.5a.75.75 0 0 1-1.5 0v-5.5h-5.5a.75.75 0 0 1 0-1.5h5.5v-5.5A.75.75 0 0 1 7 0z" />
+        </svg>
+      </button>
+      <button id="editLabelBtn" class="icon-btn" data-i18n-attr="title" data-i18n="modalManageLabels"
+        title="Manage Labels">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
+          <path d="M12.1 1.5a1.5 1.5 0 0 1 0 2.1L4.4 11.3 1.5 12l.7-2.9L9.8 1.5h2.3z" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Prompts List -->
+    <div id="promptsList" class="prompts-list">
+      <div class="empty-state">
+        <p data-i18n="emptyState">No prompts yet. Add your first prompt or right-click on selected text to save.</p>
+      </div>
+    </div>
+
+    <!-- Add Prompt Button -->
+    <button id="addPromptBtn" class="add-prompt-btn">
+      <span data-i18n="addNewPrompt">Add New Prompt</span>
+    </button>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <button id="createGroupBtn" class="link-btn" data-i18n="createNewGroupBtn">+ Create New Group</button>
+      <span id="promptCount">Total: 0 prompts</span>
+    </footer>
+  </div>
+
+  <!-- Create/Edit Prompt Modal -->
+  <div id="promptModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modalTitle" data-i18n="modalCreatePrompt">Create New Prompt</h2>
+        <button id="closePromptModal" class="close-btn">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="promptTitle" data-i18n="labelTitle">Title:</label>
+          <input type="text" id="promptTitle" data-i18n-attr="placeholder" data-i18n="placeholderPromptTitle"
+            placeholder="Enter prompt title">
+        </div>
+        <div class="form-group">
+          <label for="promptText" data-i18n="labelPromptText">Prompt Text:</label>
+          <textarea id="promptText" rows="6" data-i18n-attr="placeholder" data-i18n="placeholderPromptText"
+            placeholder="Enter your prompt here..."></textarea>
+        </div>
+        <div class="form-group">
+          <label data-i18n="labelLabels">Labels:</label>
+          <div class="label-input">
+            <input type="text" id="labelInput" data-i18n-attr="placeholder" data-i18n="labelAddLabel"
+              placeholder="Add label">
+            <button id="addLabelToPrompt" class="icon-btn">+</button>
+          </div>
+          <div id="selectedLabels" class="selected-labels"></div>
+          <div id="labelSuggestions" class="label-suggestions"></div>
+        </div>
+        <div class="form-group">
+          <label for="promptGroup" data-i18n="labelGroup">Group:</label>
+          <select id="promptGroup">
+            <option value="General" data-i18n="defaultGroup">General</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="cancelPrompt" class="btn btn-secondary" data-i18n="btnCancel">Cancel</button>
+        <button id="savePrompt" class="btn btn-primary" data-i18n="btnSavePrompt">Save Prompt</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Group Management Modal -->
+  <div id="groupModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 data-i18n="modalManageGroups">Manage Groups</h2>
+        <button id="closeGroupModal" class="close-btn">✕</button>
+      </div>
+      <div class="modal-body">
+        <div id="groupsList" class="groups-list"></div>
+        <button id="addNewGroupBtn" class="btn btn-secondary" data-i18n="createNewGroupBtn">+ Create New Group</button>
+      </div>
+      <div class="modal-footer">
+        <button id="closeGroupModalBtn" class="btn btn-secondary" data-i18n="btnClose">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Label Management Modal -->
+  <div id="labelModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 data-i18n="modalManageLabels">Manage Labels</h2>
+        <button id="closeLabelModal" class="close-btn">✕</button>
+      </div>
+      <div class="modal-body">
+        <div id="labelsList" class="groups-list"></div>
+      </div>
+      <div class="modal-footer">
+        <button id="closeLabelModalBtn" class="btn btn-secondary" data-i18n="btnClose">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Create Group Modal -->
+  <div id="createGroupModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 data-i18n="modalCreateGroup">Create New Group</h2>
+        <button id="closeCreateGroupModal" class="close-btn">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="groupName" data-i18n="labelGroupName">Group Name:</label>
+          <input type="text" id="groupName" data-i18n-attr="placeholder" data-i18n="placeholderGroupName"
+            placeholder="Enter group name">
+        </div>
+        <div class="form-group">
+          <label for="groupDescription" data-i18n="labelDescription">Description:</label>
+          <textarea id="groupDescription" rows="3" data-i18n-attr="placeholder" data-i18n="placeholderGroupDescription"
+            placeholder="Enter group description (optional)"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="cancelCreateGroup" class="btn btn-secondary" data-i18n="btnCancel">Cancel</button>
+        <button id="confirmCreateGroup" class="btn btn-primary" data-i18n="btnCreateGroup">Create Group</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Append to Existing Prompt Modal -->
+  <div id="appendPromptModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 data-i18n="modalAppendPrompt">Add to Existing Prompt</h2>
+        <button id="closeAppendPromptModal" class="close-btn">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label data-i18n="appendSelectHint">Select a prompt to append the new text to:</label>
+          <input type="text" id="appendSearchInput" data-i18n-attr="placeholder" data-i18n="searchPlaceholder"
+            placeholder="Search prompts...">
+        </div>
+        <div id="appendPromptsList" class="append-prompts-list"></div>
+        <div class="form-group append-preview-group">
+          <label data-i18n="appendPreviewLabel">Result preview (plain text):</label>
+          <pre id="appendPreview" class="append-preview"></pre>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="cancelAppendPrompt" class="btn btn-secondary" data-i18n="btnCancel">Cancel</button>
+        <button id="confirmAppendPrompt" class="btn btn-primary" data-i18n="btnAppend" disabled>Append</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings Modal -->
+  <div id="settingsModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 data-i18n="modalSettings">Settings</h2>
+        <button id="closeSettingsModal" class="close-btn">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="settings-section">
+          <h3 data-i18n="settingsGeneral">General Settings</h3>
+          <div class="setting-item">
+            <label data-i18n="settingsTheme">Theme:</label>
+            <select id="themeSelect" class="theme-select">
+              <option value="system" data-i18n="themeSystem">System</option>
+              <option value="light" data-i18n="themeLight">Light</option>
+              <option value="dark" data-i18n="themeDark">Dark</option>
+            </select>
+          </div>
+          <div class="setting-item">
+            <label data-i18n="settingsLanguage">Language:</label>
+            <select id="languageSelect" class="theme-select">
+              <option value="en">English</option>
+              <option value="zh-CN">中文（简体）</option>
+              <option value="zh-TW">中文（繁體）</option>
+            </select>
+          </div>
+          <div class="setting-item">
+            <input type="checkbox" id="enableSearch" checked>
+            <label for="enableSearch" data-i18n="settingsEnableSearch">Enable search in prompts</label>
+          </div>
+          <div class="setting-item">
+            <input type="checkbox" id="showLabels" checked>
+            <label for="showLabels" data-i18n="settingsShowLabels">Show prompt labels</label>
+          </div>
+          <div class="setting-item">
+            <input type="checkbox" id="defaultToLastGroup">
+            <label for="defaultToLastGroup" data-i18n="settingsDefaultToLastGroup">Default to last selected
+              group</label>
+          </div>
+          <div class="setting-item">
+            <input type="checkbox" id="clickToCopy" checked>
+            <label for="clickToCopy" data-i18n="settingsClickToCopy">Click prompt to copy (click to paste)</label>
+          </div>
+        </div>
+        <div class="settings-section">
+          <h3 data-i18n="settingsHighlight">Search Highlight Settings</h3>
+          <div class="setting-item">
+            <label for="highlightColor" data-i18n="settingsHighlightColor">Highlight Color:</label>
+            <input type="color" id="highlightColor" value="#4a90d9">
+          </div>
+        </div>
+        <div class="settings-section">
+          <h3 data-i18n="settingsRightClick">Right-Click Save Settings</h3>
+          <div class="setting-item">
+            <input type="checkbox" id="showContextMenu" checked>
+            <label for="showContextMenu" data-i18n="settingsShowContextMenu">Show "Save to Prompt Manager" in
+              menu</label>
+          </div>
+          <div class="setting-item">
+            <input type="checkbox" id="autoFillTitle" checked>
+            <label for="autoFillTitle" data-i18n="settingsAutoFillTitle">Auto-fill title from selected text</label>
+          </div>
+          <div class="setting-item">
+            <input type="checkbox" id="includePageUrl">
+            <label for="includePageUrl" data-i18n="settingsIncludePageUrl">Use page URL as prompt title</label>
+          </div>
+          <div class="setting-item">
+            <input type="checkbox" id="includePageTitle">
+            <label for="includePageTitle" data-i18n="settingsIncludePageTitle">Use page title as prompt title</label>
+          </div>
+        </div>
+        <div class="settings-section">
+          <h3 data-i18n="settingsSecurity">Security Settings</h3>
+          <div class="setting-item">
+            <input type="checkbox" id="warnOnSuspiciousContent" checked>
+            <label for="warnOnSuspiciousContent" data-i18n="settingsWarnOnSave">Warn about HTML tags/scripts before
+              saving (XSS protection)</label>
+          </div>
+          <div class="setting-item">
+            <input type="checkbox" id="warnOnCopyPaste" checked>
+            <label for="warnOnCopyPaste" data-i18n="settingsWarnOnCopyPaste">Warn about HTML tags/scripts before
+              copy/paste (XSS protection)</label>
+          </div>
+        </div>
+        <div class="settings-section">
+          <h3 data-i18n="settingsData">Data Management</h3>
+          <div class="data-buttons">
+            <button id="exportBtn" class="btn btn-secondary" data-i18n="btnExport">Export All Prompts</button>
+            <button id="importBtn" class="btn btn-secondary" data-i18n="btnImport">Import Prompts</button>
+            <button id="clearDataBtn" class="btn btn-danger" data-i18n="btnClearData">Clear All Data</button>
+          </div>
+        </div>
+        <div class="settings-section settings-author">
+          <!-- <h3 data-i18n="settingsAuthor">Author</h3> -->
+          <p>OneCodingNewbie Fred<br><a href="mailto:codingdogfred@gmail.com">codingdogfred@gmail.com</a><br>Version:
+            1.0.0</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="saveSettings" class="btn btn-primary" data-i18n="btnSaveSettings">Save Settings</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Security Warning Modal -->
+  <div id="securityWarningModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 data-i18n="secWarningTitle">⚠ Security Warning</h2>
+        <button id="closeSecurityWarningModal" class="close-btn">✕</button>
+      </div>
+      <div class="modal-body">
+        <p id="securityWarningIntro"></p>
+        <ul id="securityWarningList" class="security-warning-list"></ul>
+        <p id="securityWarningOutro"></p>
+      </div>
+      <div class="modal-footer">
+        <button id="securityWarningCancel" class="btn btn-secondary" data-i18n="btnCancel">Cancel</button>
+        <button id="securityWarningContinue" class="btn btn-danger" data-i18n="btnContinueAnyway">Continue
+          Anyway</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Segment Full-Text View Modal -->
+  <div id="segmentViewModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 data-i18n="segmentViewTitle">View Segment</h2>
+        <button id="closeSegmentViewModal" class="close-btn">✕</button>
+      </div>
+      <div class="modal-body">
+        <pre id="segmentViewText" class="segment-view-text"></pre>
+      </div>
+      <div class="modal-footer">
+        <button id="segmentViewCloseBtn" class="btn btn-secondary" data-i18n="btnClose">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success Notification -->
+  <div id="notification" class="notification hidden">
+    <span id="notificationText"></span>
+    <button id="closeNotification" class="close-btn">✕</button>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+
+</html>
