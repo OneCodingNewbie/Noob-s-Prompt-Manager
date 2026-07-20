@@ -8,7 +8,7 @@ A Chrome extension to save and manage AI prompts with groups and labels.
 
 ### Installation
 
-1. Download the extension from the Chrome Web Store by clicking this link [Noob's Prompt Manager](https://google.com)
+1. Download the extension from the Chrome Web Store by clicking this link [Noob's Prompt Manager](https://google.com) **(Not available yet)**
 
 2. Click "Add to Chrome" and confirm the installation.
 
@@ -25,7 +25,11 @@ OR
 
 #### Right-click to Save Prompts
 
-<video src="images/demo1.mp4" controls></video>
+
+
+https://github.com/user-attachments/assets/65b336df-aa6d-44ce-8e14-af1b00de86d5
+
+
 
 1. Select text on any webpage.
 2. Right-click and choose "Noob's Prompt Manager" > "Save to Prompt Manager".
@@ -36,7 +40,11 @@ OR
 
 #### Pasting Prompts
 
-<video src="images/demo2.mp4" controls></video>
+
+
+https://github.com/user-attachments/assets/ee836831-6916-493a-903c-22e95890ae76
+
+
 
 1. Click the textarea where you want to paste the prompt.
 2. Open the extension popup by clicking the extension icon in the toolbar.
