@@ -14,7 +14,7 @@ A Chrome extension to save and manage AI prompts with groups and labels.
 
 OR
 
-1. Download the latest zip file from this repository by clicking this link  [Link to release page](https://github.com/OneCodingNewbie/AI_Prompt_Saver/releases).
+1. Download the latest zip file from this repository by clicking this link : [Link to release page](https://github.com/OneCodingNewbie/Noob-s-Prompt-Manager/releases).
 
 2. Extract the zip file.
 3. Open Chrome and go to `chrome://extensions/`. 
