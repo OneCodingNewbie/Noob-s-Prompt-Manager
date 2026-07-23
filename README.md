@@ -8,7 +8,7 @@ A Chrome extension to save and manage AI prompts with groups and labels.
 
 ### Installation
 
-1. Download the extension from the Chrome Web Store by clicking this link [Noob's Prompt Manager](https://google.com) **(Not available yet)**
+1. Download the extension from the Chrome Web Store by clicking this link [Noob's Prompt Manager]([https://google.com](https://chromewebstore.google.com/detail/icjiaomohkeeahmekhnbemimhjekpkpg?utm_source=item-share-cb))
 
 2. Click "Add to Chrome" and confirm the installation.
 
